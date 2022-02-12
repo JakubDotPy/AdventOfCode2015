@@ -7,6 +7,9 @@ import urllib.error
 import urllib.request
 from typing import Generator
 
+import matplotlib.pyplot as plt
+import networkx as nx
+
 
 @contextlib.contextmanager
 def timing(name: str = '') -> Generator[None, None, None]:
@@ -64,3 +67,11 @@ def download_input() -> int:
         print('...')
 
     return 0
+
+
+def draw_nx_graph(G):
+    pos = nx.spring_layout(G, seed=1)
+    nx.draw(G, pos, with_labels=True)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.show()
