@@ -1,5 +1,7 @@
 import argparse
 import os.path
+from itertools import chain
+from itertools import groupby
 
 import pytest
 from support import timing
@@ -7,26 +9,25 @@ from support import timing
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 # NOTE: paste test text here
 INPUT_S = """\
+1
 """
-EXPECTED = 0
+EXPECTED = 6
+
+
+def expand(num):
+    num_s = str(num)
+    nums = [(str(sum(1 for _ in g)), k) for k, g in groupby(num_s)]
+    return ''.join(chain.from_iterable(nums))
 
 
 def compute(s: str) -> int:
-    # parse numbers
-    nums = [int(n) for n in s.splitlines()]
-    for n in nums:
-        ...
-
-    # parse lines
-    lines = s.splitlines()
-    for line in lines:
-        ...
-
-    # TODO: implement solution here!
-    return 0
+    s = s.strip()
+    for _ in range(40):
+        s = expand(s)
+    return len(s)
 
 
-@pytest.mark.template
+@pytest.mark.so
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
