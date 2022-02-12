@@ -33,7 +33,7 @@ def get_input(year: int, day: int) -> str:
         contents = f.read()
 
     url = f'https://adventofcode.com/{year}/day/{day}/input'
-    req = urllib.request.Request(url, headers={'Cookie': contents.strip()})
+    req = urllib.request.Request(url, headers={'cookie': contents.strip()})
     return urllib.request.urlopen(req).read().decode()
 
 
