@@ -3,6 +3,7 @@ import json
 import os.path
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -31,6 +32,7 @@ def compute(s: str) -> int:
     return sum_no_red(json.loads(s))
 
 
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (

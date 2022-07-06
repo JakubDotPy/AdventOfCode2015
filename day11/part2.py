@@ -5,6 +5,7 @@ import re
 from itertools import islice
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -75,6 +76,7 @@ def compute(s: str) -> int:
     return get_next_password(next_seed)
 
 
+@pytest.mark.skip  # no test input was provided for day11 part2
 @pytest.mark.complete
 @pytest.mark.parametrize(
     ('input_s', 'expected'),

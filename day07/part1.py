@@ -7,6 +7,7 @@ from operator import or_
 from operator import rshift
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -81,6 +82,7 @@ def compute(s: str) -> int:
     return get_value('a')
 
 
+@pytest.mark.skip  # test input works with "signals" "defghixy", not "a"
 @pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),

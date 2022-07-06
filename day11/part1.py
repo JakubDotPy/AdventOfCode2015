@@ -5,6 +5,7 @@ import re
 from itertools import islice
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -75,7 +76,7 @@ def compute(s: str) -> int:
     ('input_s', 'expected'),
     (
             ('abcdefgh', 'abcdffaa'),
-            ('ghijklmn', 'ghjaabcc'),
+            pytest.param('ghijklmn', 'ghjaabcc', marks=pytest.mark.skip(reason='too slow')),
             ),
     )
 def test(input_s: str, expected: int) -> None:

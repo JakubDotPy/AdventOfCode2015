@@ -3,6 +3,7 @@ import os.path
 import re
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -42,6 +43,7 @@ def compute(s: str) -> int:
     return sum(w.is_nice for w in words)
 
 
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (

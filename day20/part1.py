@@ -22,9 +22,9 @@ def divisors(n):
         ))
 
 
-def compute(s: str) -> int:
+def compute(n: int) -> int:
     i = 1
-    while sum(map(lambda x: x * 10, divisors(i))) < 33_100_000:
+    while sum(map(lambda x: x * 10, divisors(i))) < n:
         i += 1
     return i
 
@@ -32,10 +32,10 @@ def compute(s: str) -> int:
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-            (INPUT_S, EXPECTED),
+            (140, 8),
             ),
     )
-def test(input_s: str, expected: int) -> None:
+def test(input_s: int, expected: int) -> None:
     assert compute(input_s) == expected
 
 
@@ -45,7 +45,7 @@ def main() -> int:
     args = parser.parse_args()
 
     with open(args.data_file) as f, timing():
-        print(compute(f.read()))
+        print(compute(33_100_000))
 
     return 0
 

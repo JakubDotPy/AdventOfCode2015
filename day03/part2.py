@@ -4,6 +4,7 @@ import os.path
 from collections import Counter
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -52,6 +53,7 @@ def compute(s: str) -> int:
     return len(combined_counter)
 
 
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (

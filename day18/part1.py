@@ -3,6 +3,7 @@ import os.path
 from itertools import product
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -46,14 +47,14 @@ def draw_grid(grid):
     print('-' * 10)
 
 
-def compute(s: str) -> int:
+def compute(s: str, steps: int) -> int:
     grid = {
         (x, y): c
         for y, row in enumerate(s.splitlines())
         for x, c in enumerate(row)
         }
 
-    for _ in range(100):
+    for _ in range(steps):
         # draw_grid(grid)
         new_grid = {}
         for pos in grid.keys():
@@ -64,13 +65,13 @@ def compute(s: str) -> int:
 
 
 @pytest.mark.parametrize(
-    ('input_s', 'expected'),
+    ('input_s', 'steps', 'expected'),
     (
-            (INPUT_S, EXPECTED),
+            (INPUT_S, 4, EXPECTED),
             ),
     )
-def test(input_s: str, expected: int) -> None:
-    assert compute(input_s) == expected
+def test(input_s: str, steps: int, expected: int) -> None:
+    assert compute(input_s, steps) == expected
 
 
 def main() -> int:
@@ -79,7 +80,7 @@ def main() -> int:
     args = parser.parse_args()
 
     with open(args.data_file) as f, timing():
-        print(compute(f.read()))
+        print(compute(f.read(), 100))
 
     return 0
 

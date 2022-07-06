@@ -3,6 +3,7 @@ import os.path
 from random import shuffle
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -59,6 +60,7 @@ def compute(s: str) -> int:
     return steps
 
 
+@pytest.mark.skip(reason='Slow running test.')
 @pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),

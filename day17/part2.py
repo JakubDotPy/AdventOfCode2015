@@ -5,6 +5,7 @@ from itertools import combinations
 from itertools import groupby
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -26,10 +27,10 @@ def all_combinations(lst):
         )
 
 
-def compute(s: str) -> int:
+def compute(s: str, litres: int) -> int:
     nums = [int(n) for n in s.splitlines()]
 
-    TOTAL_VOLUME = 150
+    TOTAL_VOLUME = litres
 
     fit = lambda cmb: sum(cmb) == TOTAL_VOLUME
     succes_combinations = filter(fit, all_combinations(nums))
@@ -39,13 +40,13 @@ def compute(s: str) -> int:
 
 @pytest.mark.solved
 @pytest.mark.parametrize(
-    ('input_s', 'expected'),
+    ('input_s', 'litres', 'expected'),
     (
-            (INPUT_S, EXPECTED),
+            (INPUT_S, 25, EXPECTED),
             ),
     )
-def test(input_s: str, expected: int) -> None:
-    assert compute(input_s) == expected
+def test(input_s: str, litres: int, expected: int) -> None:
+    assert compute(input_s, litres) == expected
 
 
 def main() -> int:
@@ -54,7 +55,7 @@ def main() -> int:
     args = parser.parse_args()
 
     with open(args.data_file) as f, timing():
-        print(compute(f.read()))
+        print(compute(f.read(), 150))
 
     return 0
 

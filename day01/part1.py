@@ -3,6 +3,7 @@ import os.path
 import re
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -19,10 +20,18 @@ def compute(s: str) -> int:
     return s.count('(') - s.count(')')
 
 
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-            (INPUT_S, 0),
+            ('(())', 0),
+            ('()()', 0),
+            ('))(((((', 3),
+            ('())', -1),
+            ('))(', -1),
+            (')))', -3),
+            (')))', -3),
+            (')())())', -3),
             ),
     )
 def test(input_s: str, expected: int) -> None:

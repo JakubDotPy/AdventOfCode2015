@@ -2,6 +2,7 @@ import argparse
 import os.path
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -21,11 +22,12 @@ def compute(s: str) -> int:
     return total_count
 
 
+# FIXME: this test fails but run succeeds
 @pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-            (INPUT_S, 12),
+            (INPUT_S, 19),
             ),
     )
 def test(input_s: str, expected: int) -> None:

@@ -6,6 +6,7 @@ from itertools import cycle
 from itertools import repeat
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -14,7 +15,7 @@ INPUT_S = """\
 Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
 Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
 """
-EXPECTED = 1120
+EXPECTED = 689
 
 
 class Deer:
@@ -46,7 +47,7 @@ class Deer:
     __repr__ = __str__
 
 
-def compute(s: str) -> int:
+def compute(s: str, seconds: int) -> int:
     lines = s.splitlines()
     pattern = r'(^\w+|\d+)+'
     deers = [
@@ -54,7 +55,7 @@ def compute(s: str) -> int:
         for line in lines
         ]
 
-    for _ in range(2503):
+    for _ in range(seconds):
         for deer in deers:
             deer.move()
         leading_distance = max(d.distance for d in deers)
@@ -68,13 +69,13 @@ def compute(s: str) -> int:
 
 
 @pytest.mark.parametrize(
-    ('input_s', 'expected'),
+    ('input_s', 'seconds', 'expected'),
     (
-            (INPUT_S, EXPECTED),
+            (INPUT_S, 1_000, EXPECTED),
             ),
     )
-def test(input_s: str, expected: int) -> None:
-    assert compute(input_s) == expected
+def test(input_s: str, seconds: int, expected: int) -> None:
+    assert compute(input_s, seconds) == expected
 
 
 def main() -> int:
@@ -83,7 +84,7 @@ def main() -> int:
     args = parser.parse_args()
 
     with open(args.data_file) as f, timing():
-        print(compute(f.read()))
+        print(compute(f.read(), 2503))
 
     return 0
 

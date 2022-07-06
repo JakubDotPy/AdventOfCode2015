@@ -8,6 +8,7 @@ from itertools import permutations
 from operator import mul
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -76,6 +77,7 @@ def compute(s: str) -> int:
     return max_score
 
 
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (

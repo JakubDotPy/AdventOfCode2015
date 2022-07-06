@@ -4,6 +4,7 @@ from itertools import chain
 from itertools import groupby
 
 import pytest
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -27,6 +28,7 @@ def compute(s: str) -> int:
     return len(s)
 
 
+@pytest.mark.skip  # no test input was provided for day10 part2
 @pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),

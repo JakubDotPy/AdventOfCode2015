@@ -6,6 +6,7 @@ from itertools import repeat
 
 import pytest
 from more_itertools import sliding_window
+
 from support import timing
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -56,6 +57,8 @@ def compute(s: str) -> int:
     return max_happiness
 
 
+@pytest.mark.skip  # no test input was provided for day13 part2
+@pytest.mark.solved
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
